@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212; /* Fundal întunecat */
+    color: #e0e0e0; /* Text deschis pentru contrast */
+    text-align: center;
+}
+
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #1e1e1e; /* Fundal întunecat pentru container */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Umbre mai întunecate */
+}
+
+h1 {
+    color: #ffffff; /* Alb pentru contrast */
+}
+
+button {
+    background-color: #4CAF50; /* Verde pentru contrast */
+    color: #ffffff; /* Alb pentru text */
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049; /* Schimbare subtilă pe hover */
+}
+
+input[type="number"] {
+    padding: 10px;
+    margin: 5px;
+    width: 150px;
+    background-color: #2e2e2e; /* Fundal întunecat pentru input */
+    color: #ffffff; /* Text alb */
+    border: 1px solid #555; /* Bordură subtilă */
+    border-radius: 5px;
+}
+
+input[type="number"]:focus {
+    border-color: #4CAF50; /* Bordură verde la focus */
+    outline: none; /* Eliminare contur implicit */
+}
+
+#prediction-result, #network-details, #train-result {
+    margin-top: 20px;
+    color: #b0b0b0; /* Text deschis pentru rezultate */
+}
+
+a {
+    color: #4CAF50; /* Verde pentru link-uri */
+    text-decoration: none;
+}
+
+a:hover {
+    color: #45a049; /* Verde mai deschis la hover */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    background-color: #1e1e1e; /* Fundal întunecat */
+    color: #e0e0e0; /* Text deschis */
+    border: 1px solid #555; /* Bordură pentru tabel */
+}
+
+th, td {
+    padding: 12px 15px; /* Spațiere pentru lizibilitate */
+    border: 1px solid #555; /* Bordură pentru celule */
+}
+
+th {
+    background-color: #333; /* Fundal mai închis pentru antet */
+    color: #ffffff; /* Text alb */
+    font-weight: bold; /* Font mai gros pentru antet */
+}
+
+tr:nth-child(even) {
+    background-color: #2e2e2e; /* Fundal gri închis pentru rândurile pare */
+}
+
+tr:nth-child(odd) {
+    background-color: #242424; /* Fundal diferit pentru rândurile impare */
+}
+
+tr:hover {
+    background-color: #444; /* Fundal mai deschis pentru rândul pe care se trece cu mouse-ul */
+    color: #fff; /* Schimbare culoare text pe hover */
+}
+
+td {
+    word-wrap: break-word; /* Textul lung este împărțit pe mai multe linii */
+}
+
+caption {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #e0e0e0;
+}
+
