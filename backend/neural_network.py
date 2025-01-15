@@ -160,17 +160,34 @@ def antreneaza_model():
 
         if (epoch + 1) % 1000 == 0:
             print(f"Epoca {epoch + 1}/{epochs}, Pierdere: {loss:.4f}")
+
     # Matricea de ieșire pentru datele de testare
     _, test_output = propagare_inainte(
         x_test, weights_input_hidden, bias_hidden, weights_hidden_output, bias_output
     )
 
-    # Creăm matricea de rezultate
-    results = []
+    # Matricea de ieșire pentru datele de antrenare
+    _, train_output = propagare_inainte(
+        x_train, weights_input_hidden, bias_hidden, weights_hidden_output, bias_output
+    )
+
+    # Creăm matricea de rezultate pentru setul de testare
+    test_results = []
     for i, probabilities in enumerate(test_output):
         predicted_index = np.argmax(probabilities)
         predicted_class = onehot.categories_[0][predicted_index]
-        results.append({
+        test_results.append({
+            "observation": i + 1,
+            "probabilities": probabilities.tolist(),
+            "predicted_class": predicted_class
+        })
+
+    # Creăm matricea de rezultate pentru setul de antrenare
+    train_results = []
+    for i, probabilities in enumerate(train_output):
+        predicted_index = np.argmax(probabilities)
+        predicted_class = onehot.categories_[0][predicted_index]
+        train_results.append({
             "observation": i + 1,
             "probabilities": probabilities.tolist(),
             "predicted_class": predicted_class
@@ -180,7 +197,8 @@ def antreneaza_model():
 
     return jsonify({
         "message": "Modelul a fost antrenat cu succes!",
-        "results": results
+        "train_results": train_results,
+        "test_results": test_results
     })
 
 @app.route('/predict', methods=['POST'])
