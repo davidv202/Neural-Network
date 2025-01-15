@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rețea Neuronala - Iris Dataset</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Rețea Neuronala pentru Iris Dataset</h1>
+
+        <h3>Incepe antrenarea rețelei</h3>
+        <button onclick="trainNetwork()">Antreneaza</button>
+        <div id="train-result"></div>
+        <div id="test-result"></div>
+
+        <h3>Introduceti valorile pentru predictie</h3>
+        <input type="number" id="sepal-length" placeholder="Sepal Length" required>
+        <input type="number" id="sepal-width" placeholder="Sepal Width" required>
+        <input type="number" id="petal-length" placeholder="Petal Length" required>
+        <input type="number" id="petal-width" placeholder="Petal Width" required>
+        <button onclick="predictIris()">Predictie</button>
+
+        <div id="prediction-result"></div>
+
+        <h3>Detalii Rețea</h3>
+        <button onclick="getNetworkDetails()">Vezi detalii</button>
+        <div id="network-details"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
