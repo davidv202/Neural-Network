@@ -90,8 +90,8 @@ def propagare_inapoi(x, y, hidden_layer_output, output_layer_output, weights_hid
     bias_output_correction = learning_rate * np.sum(output_gradient, axis=0, keepdims=True)
 
     # 4.3 Se calculează gradienții erorilor pentru neuronii din stratul ascuns
-    hidden_error = np.dot(output_gradient, weights_hidden_output.T)  # ∑(δk * wjk)
-    hidden_gradient = hidden_layer_output * (1 - hidden_layer_output) * hidden_error  # δj = yj * (1 - yj) * ∑(...)
+    hidden_error = np.dot(output_gradient, weights_hidden_output.T) 
+    hidden_gradient = hidden_layer_output * (1 - hidden_layer_output) * hidden_error 
 
     # 4.4 Se actualizează corecțiile ponderilor dintre stratul de intrare și stratul ascuns
     delta_weights_input_hidden = learning_rate * np.dot(x.T, hidden_gradient)
@@ -116,11 +116,7 @@ def predict(features, weights_input_hidden, bias_hidden, weights_hidden_output, 
     features = np.array(features).reshape(1, -1)
 
     # Propagare înainte
-    hidden_layer_input = np.dot(features, weights_input_hidden) + bias_hidden
-    hidden_layer_output = sigmoid(hidden_layer_input)
-
-    output_layer_input = np.dot(hidden_layer_output, weights_hidden_output) + bias_output
-    output_layer_output = softmax(output_layer_input)
+    _, output_layer_output = propagare_inainte(features, weights_input_hidden, bias_hidden, weights_hidden_output, bias_output)
 
     # Indexul clasei prezise
     predicted_index = np.argmax(output_layer_output, axis=1)[0]
@@ -129,10 +125,6 @@ def predict(features, weights_input_hidden, bias_hidden, weights_hidden_output, 
     predicted_class = onehot.categories_[0][predicted_index]
 
     return predicted_class
-
-
-# Bucla de antrenare
-losses = []
 
 @app.route('/train', methods=['POST'])
 def antreneaza_model():
@@ -171,7 +163,6 @@ def antreneaza_model():
         x_train, weights_input_hidden, bias_hidden, weights_hidden_output, bias_output
     )
 
-    # Creăm matricea de rezultate pentru setul de testare
     test_results = []
     for i, probabilities in enumerate(test_output):
         predicted_index = np.argmax(probabilities)
@@ -182,7 +173,6 @@ def antreneaza_model():
             "predicted_class": predicted_class
         })
 
-    # Creăm matricea de rezultate pentru setul de antrenare
     train_results = []
     for i, probabilities in enumerate(train_output):
         predicted_index = np.argmax(probabilities)
@@ -217,10 +207,8 @@ def predictie_iris():
             data['petal_width']
         ]
 
-        # Realizează predicția
         predicted_class = predict(features, weights_input_hidden, bias_hidden, weights_hidden_output, bias_output, onehot)
 
-        # Returnează rezultatul în format JSON
         return jsonify({"predicted_class": predicted_class})
     except Exception as e:
         return jsonify({"error": str(e)}), 400
